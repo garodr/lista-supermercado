@@ -280,25 +280,25 @@ const eliminarProducto = (index) => {
                 {item.nombre}
               </div>
 
-             <div className="flex gap-2">
-
-  {!item.comprado && (
-
-    <button
-      onClick={() => abrirModal(index)}
-      className="w-11 h-11 rounded-2xl bg-green-500 text-white text-xl shadow-lg active:scale-95 transition"
-    >
-      ✓
-    </button>
-
-  )}
+             <div className="flex items-center gap-3">
 
   <button
-    onClick={() => eliminarProducto(index)}
-    className="w-11 h-11 rounded-2xl bg-red-500 text-white text-xl shadow-lg active:scale-95 transition"
+  onClick={() => eliminarProducto(index)}
+  className="w-11 h-11 rounded-2xl bg-red-500 text-white text-xl shadow-lg active:scale-95 transition"
+>
+  🗑️
+</button>
+
+{!item.comprado && (
+
+  <button
+    onClick={() => abrirModal(index)}
+    className="w-11 h-11 rounded-2xl bg-green-500 text-white text-xl shadow-lg active:scale-95 transition"
   >
-    🗑️
+    ✓
   </button>
+
+)}
 
 </div>
 
