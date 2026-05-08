@@ -280,7 +280,7 @@ const eliminarProducto = (index) => {
                 {item.nombre}
               </div>
 
-             <div className="flex items-center gap-10">
+             <div className="flex items-center gap-30">
 
   <button
   onClick={() => eliminarProducto(index)}
