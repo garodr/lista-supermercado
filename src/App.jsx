@@ -1,5 +1,16 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+const frecuentes = [
+  "Leche",
+  "Dulce de Leche",
+  "Azúcar",
+  "Arroz",
+  "Fideos",
+  "Cerveza",
+  "Manteca",
+  "Harina",
+  "Mata Arañas",
+];
 const categorias = {
   "🥛 Lácteos": [
     "leche",
@@ -97,7 +108,20 @@ export default function App() {
 
     setProducto("");
   };
+const agregarFrecuente = (nombre) => {
 
+  setLista([
+    {
+      nombre,
+      comprado: false,
+      cantidad: 0,
+      precio: 0,
+      categoria: detectarCategoria(nombre),
+    },
+    ...lista,
+  ]);
+
+};
   const abrirModal = (index) => {
     setProductoSeleccionado(index);
     setCantidad("");
@@ -182,6 +206,23 @@ export default function App() {
           </button>
 
         </div>
+        <div className="flex gap-2 overflow-x-auto pb-2 mb-6">
+
+  {frecuentes.map((item) => (
+
+    <button
+      key={item}
+
+      onClick={() => agregarFrecuente(item)}
+
+      className="bg-white/70 backdrop-blur-xl border border-white/40 px-4 py-2 rounded-2xl shadow whitespace-nowrap active:scale-95 transition"
+    >
+      + {item}
+    </button>
+
+  ))}
+
+</div>
         {Object.entries(
 
   lista.reduce((acc, item) => {
