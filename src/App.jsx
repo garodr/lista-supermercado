@@ -1,5 +1,65 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+const categorias = {
+  "🥛 Lácteos": [
+    "leche",
+    "queso",
+    "yogur",
+    "manteca",
+  ],
+
+  "🥩 Carnicería": [
+    "carne",
+    "pollo",
+    "milanesa",
+    "hamburguesa",
+  ],
+
+  "🥤 Bebidas": [
+    "coca",
+    "agua",
+    "jugo",
+    "vino",
+    "cerveza",
+  ],
+
+  "🧼 Limpieza": [
+    "lavandina",
+    "detergente",
+    "jabón",
+    "suavizante",
+  ],
+
+  "🍞 Panadería": [
+    "pan",
+    "factura",
+    "galleta",
+  ],
+
+  "🍝 Almacén": [
+    "arroz",
+    "fideos",
+    "yerba",
+    "azúcar",
+    "harina",
+  ],
+};
+
+function detectarCategoria(nombre) {
+  const texto = nombre.toLowerCase();
+
+  for (const categoria in categorias) {
+    if (
+      categorias[categoria].some((palabra) =>
+        texto.includes(palabra)
+      )
+    ) {
+      return categoria;
+    }
+  }
+
+  return "🛒 Otros";
+}
 
 export default function App() {
   const [producto, setProducto] = useState("");
@@ -30,6 +90,7 @@ export default function App() {
         comprado: false,
         cantidad: 0,
         precio: 0,
+        categoria: detectarCategoria(producto),
       },
       ...lista,
     ]);
@@ -121,64 +182,90 @@ export default function App() {
           </button>
 
         </div>
+        {Object.entries(
 
-        <AnimatePresence>
-          <div className="space-y-3">
+  lista.reduce((acc, item) => {
 
-          {lista.map((item, index) => (
+    if (!acc[item.categoria]) {
+      acc[item.categoria] = [];
+    }
 
-           <motion.div
-  key={index}
-  layout
-  initial={{ opacity: 0, y: -20 }}
-  animate={{ opacity: 1, y: 0 }}
-  exit={{ opacity: 0, scale: 0.9 }}
-  transition={{ duration: 0.25 }}
+    acc[item.categoria].push(item);
 
-  className={`rounded-3xl p-4 shadow-lg flex justify-between items-center ${
-    item.comprado
-      ? "bg-gray-200/80 text-gray-500"
-      : "bg-white/80 backdrop-blur-xl"
-  }`}
->
-              <div>
+    return acc;
 
-                <div className="text-lg font-semibold">
-                  {item.nombre}
-                </div>
+  }, {})
 
-                {item.comprado && (
+).map(([categoria, items]) => (
 
-                  <div className="text-sm mt-1">
+  <div key={categoria}>
 
-                    {item.cantidad} x $
-                    {item.precio.toLocaleString("es-AR")}
+    <div className="text-xl font-black text-gray-700 mt-6 mb-2 px-1">
+      {categoria}
+    </div>
 
-                  </div>
+    <AnimatePresence>
 
-                )}
-                
+      <div className="space-y-3">
 
+        {items.map((item, index) => (
+
+          <motion.div
+            key={item.nombre + index}
+            layout
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.25 }}
+
+            className={`rounded-3xl p-4 shadow-lg flex justify-between items-center ${
+              item.comprado
+                ? "bg-gray-200/80 text-gray-500"
+                : "bg-white/80 backdrop-blur-xl"
+            }`}
+          >
+
+            <div>
+
+              <div className="text-lg font-semibold">
+                {item.nombre}
               </div>
 
-              {!item.comprado && (
+              {item.comprado && (
 
-                <button
-                  onClick={() => abrirModal(index)}
-                  className="w-11 h-11 rounded-2xl bg-green-500 text-white text-xl shadow-lg active:scale-95 transition"
-                >
-                  ✓
-                </button>
+                <div className="text-sm mt-1">
+
+                  {item.cantidad} x $
+                  {item.precio.toLocaleString("es-AR")}
+
+                </div>
 
               )}
 
-            </motion.div>
+            </div>
 
-          ))}
+            {!item.comprado && (
 
-        </div>
-</AnimatePresence>
-        <button
+              <button
+                onClick={() => abrirModal(index)}
+                className="w-11 h-11 rounded-2xl bg-green-500 text-white text-xl shadow-lg active:scale-95 transition"
+              >
+                ✓
+              </button>
+
+            )}
+
+          </motion.div>
+
+        ))}
+
+      </div>
+
+    </AnimatePresence>
+
+  </div>
+
+))}        <button
           onClick={reiniciarCompra}
           className="w-full mt-8 bg-red-500 text-white p-4 rounded-3xl text-lg font-bold shadow-xl active:scale-95 transition"
         >
