@@ -152,7 +152,15 @@ const agregarFrecuente = (nombre) => {
 
     setModalAbierto(false);
   };
+const eliminarProducto = (index) => {
 
+  const nuevaLista = [...lista];
+
+  nuevaLista.splice(index, 1);
+
+  setLista(nuevaLista);
+
+};
   const reiniciarCompra = () => {
     const reiniciada = lista.map((item) => ({
       ...item,
@@ -272,16 +280,27 @@ const agregarFrecuente = (nombre) => {
                 {item.nombre}
               </div>
 
-              {item.comprado && (
+             <div className="flex gap-2">
 
-                <div className="text-sm mt-1">
+  {!item.comprado && (
 
-                  {item.cantidad} x $
-                  {item.precio.toLocaleString("es-AR")}
+    <button
+      onClick={() => abrirModal(index)}
+      className="w-11 h-11 rounded-2xl bg-green-500 text-white text-xl shadow-lg active:scale-95 transition"
+    >
+      ✓
+    </button>
 
-                </div>
+  )}
 
-              )}
+  <button
+    onClick={() => eliminarProducto(index)}
+    className="w-11 h-11 rounded-2xl bg-red-500 text-white text-xl shadow-lg active:scale-95 transition"
+  >
+    🗑️
+  </button>
+
+</div>
 
             </div>
 
