@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function App() {
   const [producto, setProducto] = useState("");
@@ -121,19 +122,25 @@ export default function App() {
 
         </div>
 
-        <div className="space-y-3">
+        <AnimatePresence>
+          <div className="space-y-3">
 
           {lista.map((item, index) => (
 
-            <div
-              key={index}
-              className={`rounded-3xl p-4 shadow-lg transition-all duration-500 flex justify-between items-center ${
-                item.comprado
-                  ? "bg-gray-200/80 text-gray-500"
-                  : "bg-white/80 backdrop-blur-xl"
-              }`}
-            >
+           <motion.div
+  key={index}
+  layout
+  initial={{ opacity: 0, y: -20 }}
+  animate={{ opacity: 1, y: 0 }}
+  exit={{ opacity: 0, scale: 0.9 }}
+  transition={{ duration: 0.25 }}
 
+  className={`rounded-3xl p-4 shadow-lg flex justify-between items-center ${
+    item.comprado
+      ? "bg-gray-200/80 text-gray-500"
+      : "bg-white/80 backdrop-blur-xl"
+  }`}
+>
               <div>
 
                 <div className="text-lg font-semibold">
@@ -150,6 +157,7 @@ export default function App() {
                   </div>
 
                 )}
+                
 
               </div>
 
@@ -164,12 +172,12 @@ export default function App() {
 
               )}
 
-            </div>
+            </motion.div>
 
           ))}
 
         </div>
-
+</AnimatePresence>
         <button
           onClick={reiniciarCompra}
           className="w-full mt-8 bg-red-500 text-white p-4 rounded-3xl text-lg font-bold shadow-xl active:scale-95 transition"
