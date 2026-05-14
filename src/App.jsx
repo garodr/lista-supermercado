@@ -73,6 +73,7 @@ export default function App() {
 
   const [cantidad, setCantidad] = useState("");
   const [precio, setPrecio] = useState("");
+  const [modoEdicion, setModoEdicion] = useState(false);
   const [menuAbierto, setMenuAbierto] = useState(false);
   const [modoOscuro, setModoOscuro] = useState(() => {
     return localStorage.getItem("modoOscuro") === "true";
@@ -86,6 +87,21 @@ export default function App() {
   }, [modoOscuro]);
 
   const agregarProducto = () => {
+    if (modoEdicion) {
+      const nuevaLista = [...lista];
+
+      nuevaLista[productoSeleccionado].nombre = producto;
+
+      nuevaLista[productoSeleccionado].categoria = detectarCategoria(producto);
+
+      setLista(nuevaLista);
+
+      setProducto("");
+
+      setModoEdicion(false);
+
+      return;
+    }
     if (!producto.trim()) return;
 
     setLista([
@@ -118,6 +134,13 @@ export default function App() {
     setCantidad("");
     setPrecio("");
     setModalAbierto(true);
+  };
+  const editarProducto = (index) => {
+    setProductoSeleccionado(index);
+
+    setProducto(lista[index].nombre);
+
+    setModoEdicion(true);
   };
 
   const confirmarCompra = () => {
@@ -353,6 +376,12 @@ export default function App() {
                         </div>
                       )}
                       <div className="flex items-center gap-42">
+                        <button
+                          onClick={() => editarProducto(index)}
+                          className="w-11 h-11 rounded-2xl bg-blue-500 text-white text-xl shadow-lg active:scale-95 transition"
+                        >
+                          ✏️
+                        </button>
                         <button
                           onClick={() => eliminarProducto(index)}
                           className="w-11 h-11 rounded-2xl bg-red-500 text-white text-xl shadow-lg active:scale-95 transition"
