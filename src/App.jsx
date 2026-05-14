@@ -193,8 +193,13 @@ const eliminarProducto = (index) => {
 >
 
       <div className="max-w-md mx-auto relative">
-
-        <div className={`backdrop-blur-xl shadow-2xl rounded-3xl p-6 mb-6 relative z-50 border transition-colors duration-500 ${
+          {menuAbierto && (
+             <div
+              onClick={() => setMenuAbierto(false)}
+              className="fixed inset-0 z-40"
+             />
+          )}
+      <div className={`backdrop-blur-xl shadow-2xl rounded-3xl p-6 mb-6 relative z-50 border transition-colors duration-500 ${
   modoOscuro
     ? "bg-white/10 border-white/10"
     : "bg-white/60 border-white/40"
@@ -218,12 +223,8 @@ const eliminarProducto = (index) => {
     
     {total.toLocaleString("es-AR")}
   </div>
-{menuAbierto && (
-  <div
-    onClick={() => setMenuAbierto(false)}
-    className="fixed inset-0 z-40"
-  />
-)}
+  
+  
   <AnimatePresence>
 
     {menuAbierto && (
@@ -237,19 +238,24 @@ const eliminarProducto = (index) => {
         className="absolute top-16 right-5 bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/40 overflow-hidden z-[60] w-56"
       >
 
-        <button className="w-full text-left px-5 py-4 hover:bg-gray-100 transition">
+        <button 
+        onClick={() => setMenuAbierto(false)}
+        className="w-full text-left px-5 py-4 hover:bg-gray-100 transition">
           📤 Exportar compra
         </button>
 
         <button className="w-full text-left px-5 py-4 hover:bg-gray-100 transition">
+          onClick={() => setMenuAbierto(false)}
           ℹ️ Acerca de
         </button>
 
         <button className="w-full text-left px-5 py-4 hover:bg-gray-100 transition">
+          onClick={() => setMenuAbierto(false)}
           💬 Consultas
         </button>
         <button
-  onClick={() => setModoOscuro(!modoOscuro)}
+           onClick={() => setModoOscuro(!modoOscuro)}
+           onClick={() => setMenuAbierto(false)}
   className="w-full text-left px-5 py-4 hover:bg-gray-100 transition"
 >
   {modoOscuro ? "☀️ Modo claro" : "🌙 Modo oscuro"}
