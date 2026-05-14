@@ -218,7 +218,12 @@ const eliminarProducto = (index) => {
     
     {total.toLocaleString("es-AR")}
   </div>
-
+{menuAbierto && (
+  <div
+    onClick={() => setMenuAbierto(false)}
+    className="fixed inset-0 z-40"
+  />
+)}
   <AnimatePresence>
 
     {menuAbierto && (
@@ -229,7 +234,7 @@ const eliminarProducto = (index) => {
         exit={{ opacity: 0, y: -10 }}
         transition={{ duration: 0.2 }}
 
-        className="absolute top-16 right-5 bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/40 overflow-hidden z-50 w-56"
+        className="absolute top-16 right-5 bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/40 overflow-hidden z-[60] w-56"
       >
 
         <button className="w-full text-left px-5 py-4 hover:bg-gray-100 transition">
