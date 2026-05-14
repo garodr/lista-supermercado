@@ -286,8 +286,13 @@ const eliminarProducto = (index) => {
             }
             placeholder="Agregar producto..."
             className={`flex-1 bg-transparent outline-none text-lg px-2 ${
-  modoOscuro ? "text-white placeholder:text-gray-400" : "text-black"
-}`}
+            modoOscuro ? "text-white placeholder:text-gray-400" : "text-black"
+            }`}
+            onKeyDown={(e) => {
+           if (e.key === "Enter") {
+           agregarProducto();
+            }
+          }}
           />
 
           <button
