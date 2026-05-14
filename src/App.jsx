@@ -256,7 +256,10 @@ const eliminarProducto = (index) => {
           💬 Consultas
         </button>
         <button
-           onClick={() => setModoOscuro(!modoOscuro)}
+           onClick={() => {
+            setModoOscuro(!modoOscuro);
+            setMenuAbierto(false);
+          }}
            className="w-full text-left px-5 py-4 hover:bg-gray-100 transition"
 >
   {modoOscuro ? "☀️ Modo claro" : "🌙 Modo oscuro"}
