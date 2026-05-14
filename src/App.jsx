@@ -258,7 +258,11 @@ const eliminarProducto = (index) => {
 
 </div>
 
-        <div className="backdrop-blur-xl bg-white/70 border border-white/40 shadow-xl rounded-3xl p-3 mb-6 flex gap-2 relative z-10">
+        <div className={`backdrop-blur-xl shadow-xl rounded-3xl p-3 mb-6 flex gap-2 relative z-10 border transition-colors duration-500 ${
+  modoOscuro
+    ? "bg-white/10 border-white/10"
+    : "bg-white/70 border-white/40"
+}`}>
           <input
             type="text"
             value={producto}
@@ -266,7 +270,9 @@ const eliminarProducto = (index) => {
               setProducto(e.target.value)
             }
             placeholder="Agregar producto..."
-            className="flex-1 bg-transparent outline-none text-lg px-2"
+            className={`flex-1 bg-transparent outline-none text-lg px-2 ${
+  modoOscuro ? "text-white placeholder:text-gray-400" : "text-black"
+}`}
           />
 
           <button
@@ -286,7 +292,11 @@ const eliminarProducto = (index) => {
 
       onClick={() => agregarFrecuente(item)}
 
-      className="bg-white/70 backdrop-blur-xl border border-white/40 px-4 py-2 rounded-2xl shadow whitespace-nowrap active:scale-95 transition"
+      className={`backdrop-blur-xl border px-4 py-2 rounded-2xl shadow whitespace-nowrap active:scale-95 transition ${
+  modoOscuro
+    ? "bg-white/10 border-white/10 text-white"
+    : "bg-white/70 border-white/40 text-black"
+}`}
     >
       + {item}
     </button>
@@ -312,7 +322,9 @@ const eliminarProducto = (index) => {
 
   <div key={categoria}>
 
-    <div className="text-xl font-black text-gray-700 mt-6 mb-2 px-1">
+    <div className={`text-xl font-black mt-6 mb-2 px-1 ${
+  modoOscuro ? "text-gray-200" : "text-gray-700"
+}`}>
       {categoria}
     </div>
 
@@ -330,11 +342,15 @@ const eliminarProducto = (index) => {
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.25 }}
 
-            className={`rounded-3xl p-4 shadow-lg flex justify-between items-center ${
-              item.comprado
-                ? "bg-gray-200/80 text-gray-500"
-                : "bg-white/80 backdrop-blur-xl"
-            }`}
+            className={`rounded-3xl p-4 shadow-lg flex justify-between items-center transition-colors duration-500 ${
+  item.comprado
+    ? modoOscuro
+      ? "bg-white/5 text-gray-500"
+      : "bg-gray-200/80 text-gray-500"
+    : modoOscuro
+      ? "bg-white/10 text-white backdrop-blur-xl"
+      : "bg-white/80 backdrop-blur-xl"
+}`}
           >
 
             <div>
@@ -390,7 +406,13 @@ const eliminarProducto = (index) => {
 
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
 
-          <div className="bg-white rounded-[2rem] p-6 w-full max-w-sm shadow-2xl animate-[fadeIn_.2s_ease]">
+          <div
+  className={`rounded-[2rem] p-6 w-full max-w-sm shadow-2xl animate-[fadeIn_.2s_ease] transition-colors duration-500 ${
+    modoOscuro
+      ? "bg-gray-900 text-white"
+      : "bg-white text-black"
+  }`}
+>
 
             <h2 className="text-2xl font-black mb-5">
               Confirmar compra
@@ -403,7 +425,11 @@ const eliminarProducto = (index) => {
               onChange={(e) =>
                 setCantidad(e.target.value)
               }
-              className="w-full p-4 rounded-2xl bg-gray-100 outline-none mb-3 text-lg"
+              className={`w-full p-4 rounded-2xl outline-none text-lg ${
+  modoOscuro
+    ? "bg-white/10 text-white placeholder:text-gray-400"
+    : "bg-gray-100 text-black"
+}`}
             />
 
             <input
@@ -413,7 +439,11 @@ const eliminarProducto = (index) => {
               onChange={(e) =>
                 setPrecio(e.target.value)
               }
-              className="w-full p-4 rounded-2xl bg-gray-100 outline-none mb-5 text-lg"
+              className={`w-full p-4 rounded-2xl outline-none text-lg ${
+  modoOscuro
+    ? "bg-white/10 text-white placeholder:text-gray-400"
+    : "bg-gray-100 text-black"
+}`}
             />
 
             <div className="flex gap-3">
