@@ -244,19 +244,20 @@ const eliminarProducto = (index) => {
           📤 Exportar compra
         </button>
 
-        <button className="w-full text-left px-5 py-4 hover:bg-gray-100 transition">
-          onClick={() => setMenuAbierto(false)}
+        <button 
+        onClick={() => setMenuAbierto(false)}
+        className="w-full text-left px-5 py-4 hover:bg-gray-100 transition">
           ℹ️ Acerca de
         </button>
 
-        <button className="w-full text-left px-5 py-4 hover:bg-gray-100 transition">
-          onClick={() => setMenuAbierto(false)}
+        <button 
+        onClick={() => setMenuAbierto(false)}
+        className="w-full text-left px-5 py-4 hover:bg-gray-100 transition">
           💬 Consultas
         </button>
         <button
            onClick={() => setModoOscuro(!modoOscuro)}
-           onClick={() => setMenuAbierto(false)}
-  className="w-full text-left px-5 py-4 hover:bg-gray-100 transition"
+           className="w-full text-left px-5 py-4 hover:bg-gray-100 transition"
 >
   {modoOscuro ? "☀️ Modo claro" : "🌙 Modo oscuro"}
 </button>
