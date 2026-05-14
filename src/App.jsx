@@ -88,10 +88,16 @@ export default function App() {
   const [cantidad, setCantidad] = useState("");
   const [precio, setPrecio] = useState("");
   const [menuAbierto, setMenuAbierto] = useState(false);
+  const [modoOscuro, setModoOscuro] = useState(() => {
+  return localStorage.getItem("modoOscuro") === "true";
+});
 
   useEffect(() => {
     localStorage.setItem("lista", JSON.stringify(lista));
   }, [lista]);
+  useEffect(() => {
+  localStorage.setItem("modoOscuro", modoOscuro);
+}, [modoOscuro]);
 
   const agregarProducto = () => {
     if (!producto.trim()) return;
@@ -178,11 +184,21 @@ const eliminarProducto = (index) => {
   }, 0);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-300 p-4">
+    <div
+  className={`min-h-screen p-4 transition-colors duration-500 ${
+    modoOscuro
+      ? "bg-gradient-to-br from-gray-900 to-black"
+      : "bg-gradient-to-br from-gray-100 to-gray-300"
+  }`}
+>
 
       <div className="max-w-md mx-auto relative">
 
-        <div className="backdrop-blur-xl bg-white/60 border border-white/40 shadow-2xl rounded-3xl p-6 mb-6 relative z-50">
+        <div className={`backdrop-blur-xl shadow-2xl rounded-3xl p-6 mb-6 relative z-50 border transition-colors duration-500 ${
+  modoOscuro
+    ? "bg-white/10 border-white/10"
+    : "bg-white/60 border-white/40"
+}`}>
  <button
   onClick={() => setMenuAbierto(!menuAbierto)}
   className="absolute top-4 right-4 z-50 w-12 h-12 rounded-2xl bg-black text-white text-2xl flex items-center justify-center shadow-xl active:scale-95 transition"
@@ -190,11 +206,15 @@ const eliminarProducto = (index) => {
   ☰
 </button>
 
-  <div className="text-sm text-gray-500 mb-1">
+  <div className={`text-sm mb-1 ${
+  modoOscuro ? "text-gray-400" : "text-gray-500"
+}`}>
     TOTAL GASTADO
   </div>
 
-  <div className="text-4xl font-black text-gray-800">
+  <div className={`text-4xl font-black ${
+  modoOscuro ? "text-white" : "text-gray-800"
+}`}>
     
     {total.toLocaleString("es-AR")}
   </div>
@@ -223,6 +243,12 @@ const eliminarProducto = (index) => {
         <button className="w-full text-left px-5 py-4 hover:bg-gray-100 transition">
           💬 Consultas
         </button>
+        <button
+  onClick={() => setModoOscuro(!modoOscuro)}
+  className="w-full text-left px-5 py-4 hover:bg-gray-100 transition"
+>
+  {modoOscuro ? "☀️ Modo claro" : "🌙 Modo oscuro"}
+</button>
 
       </motion.div>
 
