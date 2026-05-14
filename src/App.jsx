@@ -87,6 +87,7 @@ export default function App() {
 
   const [cantidad, setCantidad] = useState("");
   const [precio, setPrecio] = useState("");
+  const [menuAbierto, setMenuAbierto] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("lista", JSON.stringify(lista));
@@ -179,20 +180,58 @@ const eliminarProducto = (index) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-300 p-4">
 
-      <div className="max-w-md mx-auto">
+      <div className="max-w-md mx-auto relative">
 
-        <div className="backdrop-blur-xl bg-white/60 border border-white/40 shadow-2xl rounded-3xl p-6 mb-6">
+        <div className="backdrop-blur-xl bg-white/60 border border-white/40 shadow-2xl rounded-3xl p-6 mb-6 relative">
 
-          <div className="text-sm text-gray-500 mb-1">
-            TOTAL GASTADO
-          </div>
+ <button
+  onClick={() => setMenuAbierto(!menuAbierto)}
+  className="absolute top-4 right-4 z-50 w-12 h-12 rounded-2xl bg-black text-white text-2xl flex items-center justify-center shadow-xl active:scale-95 transition"
+>
+  ☰
+</button>
 
-          <div className="text-4xl font-black text-gray-800">
-            $
-            {total.toLocaleString("es-AR")}
-          </div>
+  <div className="text-sm text-gray-500 mb-1">
+    TOTAL GASTADO
+  </div>
 
-        </div>
+  <div className="text-4xl font-black text-gray-800">
+    $
+    {total.toLocaleString("es-AR")}
+  </div>
+
+  <AnimatePresence>
+
+    {menuAbierto && (
+
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -10 }}
+        transition={{ duration: 0.2 }}
+
+        className="absolute top-16 right-5 bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/40 overflow-hidden z-50 w-56"
+      >
+
+        <button className="w-full text-left px-5 py-4 hover:bg-gray-100 transition">
+          📤 Exportar compra
+        </button>
+
+        <button className="w-full text-left px-5 py-4 hover:bg-gray-100 transition">
+          ℹ️ Acerca de
+        </button>
+
+        <button className="w-full text-left px-5 py-4 hover:bg-gray-100 transition">
+          💬 Consultas
+        </button>
+
+      </motion.div>
+
+    )}
+
+  </AnimatePresence>
+
+</div>
 
         <div className="backdrop-blur-xl bg-white/70 border border-white/40 shadow-xl rounded-3xl p-3 mb-6 flex gap-2">
 
