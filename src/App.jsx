@@ -336,7 +336,11 @@ export default function App() {
                     <div>
                       <div className="text-lg font-semibold">{item.nombre}</div>
                       {item.comprado && (
-                        <div className="text-sm mt-1">
+                        <div
+                          className={`text-sm mt-1 ${
+                            modoOscuro ? "text-gray-400" : "text-gray-700"
+                          }`}
+                        >
                           {item.cantidad} x $
                           {item.precio.toLocaleString("es-AR")}
                           <span className="mx-2">=</span>
@@ -381,7 +385,7 @@ export default function App() {
       </div>
 
       {modalAbierto && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
           <div
             className={`rounded-[2rem] p-6 w-full max-w-sm shadow-2xl animate-[fadeIn_.2s_ease] transition-colors duration-500 ${
               modoOscuro ? "bg-gray-900 text-white" : "bg-white text-black"
