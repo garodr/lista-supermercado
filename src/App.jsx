@@ -69,6 +69,7 @@ export default function App() {
 
   const [modalAbierto, setModalAbierto] = useState(false);
   const [modalAcercaDe, setModalAcercaDe] = useState(false);
+  const [modalConsultas, setModalConsultas] = useState(false);
 
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
 
@@ -258,7 +259,10 @@ export default function App() {
                 </button>
 
                 <button
-                  onClick={() => setMenuAbierto(false)}
+                  onClick={() => {
+                    setModalConsultas(true);
+                    setMenuAbierto(false);
+                  }}
                   className="w-full text-left px-5 py-4 hover:bg-gray-100 transition"
                 >
                   💬 Consultas
@@ -483,6 +487,32 @@ export default function App() {
 
             <button
               onClick={() => setModalAcercaDe(false)}
+              className="w-full mt-6 p-4 rounded-2xl bg-black text-white font-bold"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      )}
+      {modalConsultas && (
+        <div className="fixed inset-0 z-[120] bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
+          <div
+            className={`rounded-[2rem] p-6 w-full max-w-sm shadow-2xl transition-colors duration-500 ${
+              modoOscuro ? "bg-gray-900 text-white" : "bg-white text-black"
+            }`}
+          >
+            <h2 className="text-2xl font-black mb-4">💬 Consultas</h2>
+
+            <p className="text-lg leading-relaxed break-all">
+              Contacto:
+              <strong>
+                <br />
+                betelgeuse_software@gmail.com
+              </strong>
+            </p>
+
+            <button
+              onClick={() => setModalConsultas(false)}
               className="w-full mt-6 p-4 rounded-2xl bg-black text-white font-bold"
             >
               Cerrar
