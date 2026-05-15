@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-const [modalAcercaDe, setModalAcercaDe] = useState(false);
 const frecuentes = [
   "Leche",
   "Dulce de Leche",
@@ -69,6 +68,7 @@ export default function App() {
   });
 
   const [modalAbierto, setModalAbierto] = useState(false);
+  const [modalAcercaDe, setModalAcercaDe] = useState(false);
 
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
 
