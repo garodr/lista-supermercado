@@ -375,7 +375,7 @@ export default function App() {
                           </strong>
                         </div>
                       )}
-                      <div className="flex items-center justify-between w-44">
+                      <div className="flex items-center justify-between w-84">
                         <button
                           onClick={() => eliminarProducto(index)}
                           className="w-11 h-11 rounded-2xl bg-red-500 text-white text-xl shadow-lg active:scale-95 transition"
